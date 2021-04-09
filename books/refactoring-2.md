@@ -16,8 +16,9 @@
       - [함수 선언 바꾸기](#함수-선언-바꾸기)
       - [변수 캡슐화하기](#변수-캡슐화하기)
       - [변수 이름 바꾸기](#변수-이름-바꾸기)
-      - [매개 변수 객체 만들기](#매개-변수-객체-만들기)
+      - [매개변수 객체 만들기](#매개변수-객체-만들기)
       - [여러 함수를 클래스로 묶기](#여러-함수를-클래스로-묶기)
+      - [여러 함수를 변환 함수로 묶기](#여러-함수를-변환-함수로-묶기)
       - [단계 쪼개기](#단계-쪼개기)
     - [캡슐화](#캡슐화)
       - [레코드 캡슐화하기](#레코드-캡슐화하기)
@@ -230,41 +231,342 @@ function printOwing(invoice) {
 
 #### 함수 인라인하기 (Inline Function)
 
+```javascript
+function getRating(driver) {
+  return moreThanFiveLateDeliveries(driver) ? 2 : 1;
+}
+
+function moreThanFiveLateDeliveries(driver) {
+  return driver.numberOfLateDeliveries > 5;
+}
+```
+
+```javascript
+function getRating(driver) {
+  return driver.numberOfLateDeliveries > 5 ? 2 : 1;
+}
+```
+
 #### 변수 추출하기
+
+```javascript
+return (
+  order.quantity * order.itemPrice -
+  Math.max(0, order.quantity - 500) * order.itemPrice * 0.05 +
+  Math.min(order.quantity * order.itemPrice * 0.1, 100)
+);
+```
+
+```javascript
+const basePrice = order.quantity * order.itemPrice;
+const quantityDiscount =
+  Math.max(0, order.quantity - 500) * order.itemPrice * 0.05;
+const shipping = Math.min(basePrice * 0.1, 100);
+
+return basePrice - quantityDiscount + shipping;
+```
 
 #### 변수 인라인하기
 
+```javascript
+let basePrice = anOrder.basePrice;
+return basePrice > 1000;
+```
+
+```javascript
+return anOrder.basePrice > 1000;
+```
+
 #### 함수 선언 바꾸기
+
+```javascript
+function circum(radius) {...}
+```
+
+```javascript
+function circumference(radius) {...}
+```
 
 #### 변수 캡슐화하기
 
+```javascript
+let defaultOwner = { firstName: "마틴", lastName: "파울러" };
+```
+
+```javascript
+let defaultOwner = { firstName: "마틴", lastName: "파울러" };
+export function defaultOwner() {
+  return defaultOwnerData;
+}
+export function setDefaultOwner(arg) {
+  defaultOwnerData = arg;
+}
+```
+
 #### 변수 이름 바꾸기
 
-#### 매개 변수 객체 만들기
+```javascript
+let a = height * width;
+```
+
+```javascript
+let area = height * width;
+```
+
+#### 매개변수 객체 만들기
+
+```javascript
+function amountInvoiced(startDate, endDate) {...}
+function amountReceived(startDate, endDate) {...}
+function amountOverdue(startDate, endDate) {...}
+```
+
+```javascript
+function amountInvoiced(aDateRange) {...}
+function amountReceived(aDateRange) {...}
+function amountOverdue(aDateRange) {...}
+```
 
 #### 여러 함수를 클래스로 묶기
 
+```javascript
+function base(aReading) {...}
+function taxableCharge(aReading) {...}
+function calculateBaseCharge(aReading) {...}
+```
+
+```javascript
+class Reading {
+  base() {...}
+  taxableCharge() {...}
+  calculateBaseCharge() {...}
+}
+```
+
+#### 여러 함수를 변환 함수로 묶기
+
+```javascript
+function base(aReading) {...}
+function taxableCharge(aReading) {...}
+```
+
+```javascript
+function enrichReading(argReading) {
+  const aReading = _.cloneDeep(argReading);
+  aReading.baseCharge = base(aReading);
+  aReading.taxableCharge = taxableCharge(aReading);
+  return aReading;
+}
+```
+
 #### 단계 쪼개기
+
+```javascript
+const orderData = orderString.split(/\s+/);
+const productPrice = priceList[orderData[0].split("-")[1]];
+const orderPrice = parseInt(orderData[1]) * productPrice;
+```
+
+```javascript
+const orderRecord = parseOrder(order);
+const orderPrice = price(orderRecord, priceList);
+
+function parseOrder(aString) {
+  const values = aString.split(/\s+/);
+  return {
+    productID: values[0].split("-")[1],
+    quantity: parseInt(values[1]),
+  };
+}
+
+function price(order, priceList) {
+  return order.quantity * priceList[order.productID];
+}
+```
 
 ### 캡슐화
 
 #### 레코드 캡슐화하기
 
+```javascript
+organization = { name: "애크미 구스베리", country: "GB" };
+```
+
+```javascript
+class Organization {
+  constructor(data) {
+    this._name = data.name;
+    this._country = data.country;
+  }
+  get name() {
+    return this._name;
+  }
+  set name(arg) {
+    this._name = arg;
+  }
+  get country() {
+    return this._country;
+  }
+  set country(arg) {
+    this._country = arg;
+  }
+}
+```
+
 #### 컬렉션 캡슐화하기
+
+```javascript
+class Person {
+  get courses() {
+    return this._courses;
+  }
+  set courses(aList) {
+    this._courses = aList;
+  }
+}
+```
+
+```javascript
+class Person {
+  get courses()         { return this._courses.slice(); }
+  addCourse(aCourse)    {...}
+  removeCourse(aCourse) {...}
+}
+```
 
 #### 기본형을 객체로 바꾸기
 
+```javascript
+orders.filter((o) => "high" === o.priority || "rush" === o.priority);
+```
+
+```javascript
+orders.filter((o) => o.priority.higherThan(new Priority("normal")));
+```
+
 #### 임시 변수를 질의 함수로 바꾸기
+
+```javascript
+const basePrice = this._quantity * this._itemPrice;
+if (basePrice > 1000) return basePrice * 0.95;
+else return basePrice * 0.98;
+```
+
+```javascript
+get basePrice() { this._quantity * this._itemPrice; }
+...
+if (this.basePrice > 1000)
+  return this.basePrice * 0.95;
+else
+  return this.basePrice * 0.98;
+```
 
 #### 클래스 추출하기
 
+```javascript
+class Person {
+  get officeAreaCode() {
+    return this._officeAreaCode;
+  }
+  get officeNumber() {
+    return this._officeNumber;
+  }
+}
+```
+
+```javascript
+class Person {
+  get officeAreaCode() { return this._telephoneNumber.areaCode; }
+  get officeNumber()   { return this._telephoneNumber.number; }
+}
+
+class TelephoneNumber() {
+  get areaCode()  { return this._areaCode; }
+  get number()    { return this._number; }
+}
+```
+
 #### 클래스 인라인하기
+
+```javascript
+class Person {
+  get officeAreaCode() { return this._telephoneNumber.areaCode; }
+  get officeNumber()   { return this._telephoneNumber.number; }
+}
+
+class TelephoneNumber() {
+  get areaCode()  { return this._areaCode; }
+  get number()    { return this._number; }
+}
+```
+
+```javascript
+class Person {
+  get officeAreaCode() {
+    return this._officeAreaCode;
+  }
+  get officeNumber() {
+    return this._officeNumber;
+  }
+}
+```
 
 #### 위임 숨기기
 
+```javascript
+manager = aPerson.department.manager;
+```
+
+```javascript
+manager = aPerson.manager;
+class Person {
+  get manager() {
+    return this.department.manager;
+  }
+}
+```
+
 #### 중개자 제거하기
 
+```javascript
+manager = aPerson.manager;
+
+class Person {
+  get manager() {
+    return this.department.manager;
+  }
+}
+```
+
+```javascript
+manager = aPerson.department.manager;
+```
+
 #### 알고리즘 교체하기
+
+```javascript
+function foundPerson(people) {
+  for (let i = 0; i < people.length; i++) {
+    if (people[i] === "Don") {
+      return "Don";
+    }
+    if (people[i] === "John") {
+      return "John";
+    }
+    if (people[i] === "Kent") {
+      return "Kent";
+    }
+  }
+  return "";
+}
+```
+
+```javascript
+function foundPerson(people) {
+  const candidates = ["Don", "John", "Kent"];
+  return people.find((p) => candidates.includes(p)) || "";
+}
+```
 
 ### 기능 이동
 
