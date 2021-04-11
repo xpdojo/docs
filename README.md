@@ -17,7 +17,7 @@
 
 > TDD의 이름 자체에 '테스트'가 들어 있기는 하지만 사실 **TDD는 설계에 대한 실행 관례다.**
 
-![tdd-global-lifecycle](images/tdd-global-lifecycle.png)
+![tdd-global-lifecycle](image/tdd-global-lifecycle.png)
 
 _출처: [위키피디아](https://en.wikipedia.org/wiki/Test-driven_development)_
 

@@ -31,7 +31,7 @@
 전체적으로 자동화되고 릴리즈가 빨라지는 일들이 기술적 실행 관례를 도입함으로써
 얻을 수 있는 가치들이다.
 
-![xp-circles](../images/xp-circles.jpg)
+![xp-circles](../image/xp-circles.jpg)
 
 _출처: [xprogramming.com](https://www.xprogramming.com/what-is-extreme-programming)_
 
