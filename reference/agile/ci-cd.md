@@ -8,24 +8,25 @@
 
 ## 참고 자료
 
-- [하루에 1000번 배포하는 조직 되기](https://blog.banksalad.com/tech/become-an-organization-that-deploys-1000-times-a-day/), 뱅크샐러드
-- [CI/CD 5분 개념 정리 (현업에서 쓰는 개발 프로세스)](https://www.youtube.com/watch?v=0Emq5FypiMM), 드림코딩
-- [Continuous integration](https://en.wikipedia.org/wiki/Continuous_integration), Wikipedia
-- [Continuous Integration](https://martinfowler.com/articles/continuousIntegration.html), Martin Fowler
-- [Continuous Integration](https://continuousdelivery.com/foundations/continuous-integration/), Jez Humble
-- [What is CI/CD?](https://www.redhat.com/en/topics/devops/what-is-ci-cd), Red Hat
-- [It’s not CI, it’s just CI theatre](https://www.gocd.org/2017/05/16/its-not-CI-its-CI-theatre/), gocd (안티 패턴: CI 극장)
-- [CI/CD Best Practices](https://www.jetbrains.com/teamcity/ci-cd-guide/ci-cd-best-practices/), JetBrains
-- [How to get started with Continuous Integration](https://www.atlassian.com/continuous-delivery/continuous-integration/how-to-get-to-continuous-integration), Atlassian
-- [Daily Build and Smoke Test](https://stevemcconnell.com/articles/daily-build-and-smoke-test/), IEEE Software, Vol. 13, No. 4, July 1996, Steve McConnell
-- [CI Team responsibilities](https://www.thoughtworks.com/continuous-integration), Thoughtworks
+- [지속적인 통합](continuous-integration.md) - 폴 M. 듀발, 스티븐 M. 마티야스, 앤드류 글로버
+- [하루에 1000번 배포하는 조직 되기](https://blog.banksalad.com/tech/become-an-organization-that-deploys-1000-times-a-day/) - 뱅크샐러드
+- [CI/CD 5분 개념 정리 (현업에서 쓰는 개발 프로세스)](https://www.youtube.com/watch?v=0Emq5FypiMM) - 드림코딩
+- [Continuous integration](https://en.wikipedia.org/wiki/Continuous_integration) - Wikipedia
+- [Continuous Integration](https://martinfowler.com/articles/continuousIntegration.html) - Martin Fowler
+- [Continuous Integration](https://continuousdelivery.com/foundations/continuous-integration/) - Jez Humble
+- [What is CI/CD?](https://www.redhat.com/en/topics/devops/what-is-ci-cd) - Red Hat
+- [It’s not CI, it’s just CI theatre](https://www.gocd.org/2017/05/16/its-not-CI-its-CI-theatre/) - gocd (안티 패턴: CI 극장)
+- [CI/CD Best Practices](https://www.jetbrains.com/teamcity/ci-cd-guide/ci-cd-best-practices/) - JetBrains
+- [How to get started with Continuous Integration](https://www.atlassian.com/continuous-delivery/continuous-integration/how-to-get-to-continuous-integration) - Atlassian
+- [Daily Build and Smoke Test](https://stevemcconnell.com/articles/daily-build-and-smoke-test/) - IEEE Software, Vol. 13, No. 4, July 1996, Steve McConnell
+- [CI Team responsibilities](https://www.thoughtworks.com/continuous-integration) - Thoughtworks
 - [CI (Continuous Integration)이란?](https://www.nextree.co.kr/p10799/) - 넥스트리소프트
 
-![redhat-ci-cd](./../image/ci-cd/redhat-ci-cd.png)
+![redhat-ci-cd](../../image/ci-cd/redhat-ci-cd.png)
 
 *[What is CI/CD?](https://www.redhat.com/en/topics/devops/what-is-ci-cd), Red Hat*
 
-![aws-ci](../image/ci-cd/aws-ci-cd.png)
+![aws-ci](../../image/ci-cd/aws-ci-cd.png)
 
 *[What is Continuous Integration?](https://aws.amazon.com/devops/continuous-integration/), AWS*
 
@@ -154,7 +155,7 @@
 
 ## 지속적 제공(CD, Continuous Delivery)
 
-![continuous-delivery-deployment](../image/ci-cd/continuous-delivery-deployment.png)
+![continuous-delivery-deployment](../../image/ci-cd/continuous-delivery-deployment.png)
 
 *[What's the difference between Continuous Delivery and Continuous Deployment?](https://www.gocd.org/2017/10/17/difference-between-continuous-delivery-continuous-deployment-infographic.html), gocd*
 
